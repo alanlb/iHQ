@@ -1,7 +1,11 @@
 package br.com.projeto.ihq;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Toast;
 
 public class DefaultActivity extends AppCompatActivity {
     @Override
@@ -39,4 +43,20 @@ public class DefaultActivity extends AppCompatActivity {
         super.onDestroy();
         System.out.println("onDestroy  - " + this.getClass().getSimpleName());
     }
+
+    public Context getContext(){return this;}
+
+
+    public void setToast(String mensagem){
+       Toast.makeText(getContext(), mensagem, Toast.LENGTH_SHORT ).show();
+
+    }
+     public void setSnackbar(View v, String mensagem){
+         Snackbar.make(v, mensagem, Snackbar.LENGTH_SHORT).show();
+
+     }
+
+
+
+
 }

@@ -10,7 +10,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends DefaultActivity {
+import br.com.projeto.ihq.dao.DaoGeneric;
+
+public class LoginActivity extends DefaultActivity {
 
     private Button bt;
     private EditText et;
@@ -24,9 +26,6 @@ public class MainActivity extends DefaultActivity {
     }
 
     private void carregarComponentes() {
-        bt = findViewById(R.id.btClick);
-        et = findViewById(R.id.etNome);
-        tv = findViewById(R.id.tvNome);
     }
 
 
@@ -44,20 +43,21 @@ public class MainActivity extends DefaultActivity {
 
     public void clickNovaActivity(View view) {
 
-        String nome = this.et.getText().toString();
-        System.out.println((nome == ""));
-        System.out.println(nome.isEmpty());
-        System.out.println(nome);
 
-        if (nome == "" || nome.isEmpty()) {
-            Toast.makeText(this,
-                    "DIGITE ALGUMA INFORMAÇÃO",
-                    Toast.LENGTH_SHORT).show();
-        return;
-        }
+    }
 
-        Intent intent = new Intent(this, DashBoardActivity.class);
-        intent.putExtra("nome", nome);
-        startActivity(intent);
+    public void telaCadastrar(View view) {
+        Intent i = new Intent(getContext(), CadastrarUsuarioActivity.class);
+        startActivity(i);
+
+
+    }
+
+    public void login(View view) {
+        //validar
+        Intent i = new Intent(getContext(), DashBoardActivity.class);
+        startActivity(i);
+        finish();
+
     }
 }

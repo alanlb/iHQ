@@ -4,27 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_gradient"
     android:orientation="vertical"
     android:padding="15dp"
-    android:background="@drawable/background_gradient"
-    tools:context=".LoginActivity">
+    android:id="@+id/ll_cadastro_usuario">
 
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/input_usuario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         android:textColorHint="@color/textHint">
 
         <EditText
-            android:id="@+id/ed_login_usuario"
+            android:id="@+id/ed_cadastro_nome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_perm_identity_black_24dp"
             android:drawablePadding="5dp"
             android:ems="10"
-            android:hint="Login"
+            android:hint="Nome"
             android:inputType="textEmailAddress"
-            android:drawableLeft="@drawable/ic_person_black_24dp"
             android:paddingLeft="0dp" />
 
     </android.support.design.widget.TextInputLayout>
@@ -37,14 +37,32 @@
         android:textColorHint="@color/textHint">
 
         <EditText
-            android:id="@+id/ed_senha_usuario"
+            android:id="@+id/ed_cadastro_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_person_black_24dp"
+            android:drawablePadding="5dp"
+            android:ems="10"
+            android:hint="Login"
+            android:inputType="textEmailAddress"
+            android:paddingLeft="0dp" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:textColorHint="@color/textHint">
+
+        <EditText
+            android:id="@+id/ed_cadastro_senha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_lock_open_black_24dp"
             android:drawablePadding="5dp"
             android:ems="10"
             android:hint="Senha"
-
-            android:drawableLeft="@drawable/ic_lock_open_black_24dp"
             android:inputType="textEmailAddress"
             android:paddingLeft="0dp" />
 
@@ -52,33 +70,24 @@
 
 
     <Button
+        android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="Login"
-        android:id="@+id/button"
-        android:onClick="login"
-        android:background="@drawable/selector_xml_btn_yellow"
         android:layout_gravity="center_horizontal"
-        />
-
-
-
-    <android.support.v4.widget.Space
-        android:layout_width="match_parent"
-        android:layout_height="23dp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text=" Cadastra-se "
-            android:textColor="@color/textHint"
-            android:gravity="center"
-            android:onClick="telaCadastrar"/>
+        android:layout_marginTop="30dp"
+        android:background="@drawable/selector_xml_btn_yellow"
+        android:text="Cadastar"
+        android:onClick="cadastrar"/>
 
     <android.support.v4.widget.Space
         android:layout_width="match_parent"
-        android:layout_height="23dp" />
+        android:layout_height="22dp" />
+    <TextView
+        android:id="@+id/tv_erro"
+        android:textColor="@color/textErro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"/>
 
 
 </LinearLayout>

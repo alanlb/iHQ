@@ -2,5 +2,13 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#ffffff</color>
+
+
+
+    <color name="textHint">#FFCC00</color>
+
+
+
+    <color name="textErro">#ff0000</color>
 </resources>
