@@ -36,6 +36,8 @@
 
         android:textColorHint="@color/textHint">
 
+
+
         <EditText
             android:id="@+id/ed_cadastro_login"
             android:layout_width="match_parent"
@@ -43,7 +45,7 @@
             android:drawableLeft="@drawable/ic_person_black_24dp"
             android:drawablePadding="5dp"
             android:ems="10"
-            android:hint="Login"
+            android:hint="Login/Email"
             android:inputType="textEmailAddress"
             android:paddingLeft="0dp" />
 
@@ -68,6 +70,10 @@
 
     </android.support.design.widget.TextInputLayout>
 
+    <android.support.v4.widget.Space
+        android:layout_width="match_parent"
+        android:layout_height="23dp" />
+
 
     <Button
         android:id="@+id/button"
@@ -83,7 +89,7 @@
         android:layout_width="match_parent"
         android:layout_height="22dp" />
     <TextView
-        android:id="@+id/tv_erro"
+        android:id="@+id/tv_erro_cadastro"
         android:textColor="@color/textErro"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

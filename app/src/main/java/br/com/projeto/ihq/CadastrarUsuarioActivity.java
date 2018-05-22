@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import br.com.projeto.ihq.dao.DaoGeneric;
+import br.com.projeto.ihq.exception.ValidationException;
 import br.com.projeto.ihq.model.Usuario;
 import br.com.projeto.ihq.util.Util;
 import br.com.projeto.ihq.util.WebServiceUtil;
@@ -40,23 +41,37 @@ public class CadastrarUsuarioActivity extends DefaultActivity {
         this.etNome = findViewById(R.id.ed_cadastro_nome);
         this.etLogin = findViewById(R.id.ed_cadastro_login);
         this.etSenha = findViewById(R.id.ed_cadastro_senha);
-        this.tvErro = findViewById(R.id.tv_erro);
+        this.tvErro = findViewById(R.id.tv_erro_cadastro);
         layout = findViewById(R.id.ll_cadastro_usuario);
     }
 
 
     public void cadastrar(View view) {
-        String nome = etNome.getText().toString();
-        String login = etLogin.getText().toString();
-        String senha = etSenha.getText().toString();
+        try {
+            String nome = etNome.getText().toString();
+            String login = etLogin.getText().toString();
+            String senha = etSenha.getText().toString();
 
-        final Usuario usuario = new Usuario();
-        usuario.setNomeComplete(nome);
-        usuario.setLogin(login);
-        usuario.setSenha(senha);
 
-        //define a mensagem
+            Util.validarLoginCadastroLogin(nome, login, senha);
 
+
+            Usuario usuario = new Usuario();
+            usuario.setNomeCompleto(nome);
+            usuario.setLogin(login);
+            usuario.setSenha(senha);
+
+            salvarUsuario(usuario);
+
+
+        } catch (ValidationException e) {
+            e.printStackTrace();
+            tvErro.setText(e.getMessage());
+
+        }
+    }
+
+    private void salvarUsuario(final Usuario usuario) {
         progressDialog = ProgressDialog.show(getContext(), "", "Verificando Internet", true);
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -68,15 +83,22 @@ public class CadastrarUsuarioActivity extends DefaultActivity {
                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
                         public void run() {
-                            WebServiceUtil.salvarUsuarioWebService(usuario, progressDialog);
-                            System.out.println("ID: " + usuario.getId());
-                            if (usuario.getId() != null) {
-                                DaoGeneric.salvarUsuario(usuario);
-                                //setToast("Usuario Cadastrado com Sucesso");
-                                setSnackbar(layout, "Usuario Cadastrado com Sucesso");
-                                Intent i = new Intent(getContext(), DashBoardActivity.class);
-                                startActivity(i);
-                                finish();
+
+                            try {
+
+                                WebServiceUtil.salvarUsuarioWebService(usuario, progressDialog);
+                                System.out.println("ID: " + usuario.getId());
+                                if (usuario.getId() != null) {
+                                    DaoGeneric.salvarUsuario(getContext(), usuario);
+                                    //setToast("Usuario Cadastrado com Sucesso");
+                                    setSnackbar(layout, "Usuario Cadastrado com Sucesso");
+                                    Intent i = new Intent(getContext(), DashBoardActivity.class);
+                                    startActivity(i);
+                                    finish();
+                                }
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
                             }
                             progressDialog.dismiss();
                         }
@@ -87,6 +109,6 @@ public class CadastrarUsuarioActivity extends DefaultActivity {
                 }
             }
         }, 1500);
-
     }
+
 }
